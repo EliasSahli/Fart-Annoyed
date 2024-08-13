@@ -33,7 +33,7 @@ Game::Game(MainWindow& wnd)
 {
 	const Color color[4] = { Colors::Red,Colors::Green,Colors::Blue,Colors::Cyan };
 
-	const Vec2 topleft(0.0f, 0.0f);
+	const Vec2 topleft(40.0f, 40.0f);
 
 	int i = 0;
 	for (int y = 0; y < nBricksDown; y++)
