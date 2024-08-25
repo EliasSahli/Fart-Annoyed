@@ -25,7 +25,7 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	ball(Vec2(300.0f, 300.0f), Vec2(300.0f, 300.0f)),
+	ball(Vec2(300.0f +24.0f, 300.0f), Vec2(-300.0f, -300.0f)),
 	walls(0.0f, float(gfx.ScreenWidth), 0.0f, float(gfx.ScreenHeight)),
 	soundPad(L"Sounds\\arkpad.wav"),
 	soundBrick(L"Sounds\\arkbrick.wav"),
@@ -65,13 +65,35 @@ void Game::UpdateModel()
 
 	ball.Update(dt);
 
-	for ( Brick& b : bricks)
+	bool collisionHasHappened = false;
+	int curColIndex;
+	float curClosestDistSq;
+
+	for (int i = 0; i < nbricks; i++)
 	{
-		if (b.DoWallCollision(ball))
+		if (bricks[i].CheckBallCollision(ball))
 		{
-			soundBrick.Play();
-			break;
+			float newClosestDistSq = (ball.GetPos() - bricks[i].GetCenter()).GetLengthSq();
+			if (collisionHasHappened)
+			{
+				if (newClosestDistSq < curClosestDistSq)
+				{
+					curClosestDistSq = newClosestDistSq;
+					curColIndex = i;
+				}
+			}
+			else
+			{
+				curClosestDistSq = newClosestDistSq;
+				curColIndex = i;
+				collisionHasHappened = true;
+			}
 		}
+	}
+	if (collisionHasHappened)
+	{
+		bricks[curColIndex].ExecuteBallCollision(ball);
+		soundBrick.Play();
 	}
 
 	if (pad.DoBallCollision(ball))
