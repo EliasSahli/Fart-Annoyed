@@ -9,6 +9,7 @@ Game::Game(MainWindow& wnd)
 	walls(0.0f, float(gfx.ScreenWidth), 0.0f, float(gfx.ScreenHeight)),
 	soundPad(L"Sounds\\arkpad.wav"),
 	soundBrick(L"Sounds\\arkbrick.wav"),
+	soundGameOver(L"Sounds\\Fart1.wav"),
 	pad(Vec2(100.0f, 500.0f), 50.0f, 15.0f)
 {
 	const Color color[4] = { Colors::Red,Colors::Green,Colors::Blue,Colors::Cyan };
@@ -99,6 +100,7 @@ void Game::UpdateModel( float dt)
 		}
 		else if (ballWallColResult == 2)
 		{
+			soundGameOver.Play();
 			gameIsOver = true;
 		}
 	}
