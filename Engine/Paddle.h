@@ -6,6 +6,7 @@
 #include "Colors.h"
 #include "Graphics.h"
 #include "Keyboard.h"
+#include <cmath>
 
 class Paddle
 {
@@ -16,7 +17,6 @@ public:
 	void DoWallCollision(const RectF& walls);
 	void Update(const Keyboard& kbd, float dt);
 	RectF GetRect() const;
-
 
 private:
 	static constexpr float wingWidth = 18.0f;
