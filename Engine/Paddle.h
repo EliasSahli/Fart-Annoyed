@@ -28,6 +28,7 @@ private:
 	float halfHeight;
 	float halfWidth;
 	float exitFactor = 0.045f;
+	float fixedZoneHalfWidth = 15.0f;
 
 	Vec2 pos;
 
