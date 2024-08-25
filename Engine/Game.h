@@ -57,4 +57,6 @@ private:
 	RectF walls;
 	Sound soundPad;
 	Sound soundBrick;
+
+	bool gameIsOver = false;
 };

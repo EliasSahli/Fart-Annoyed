@@ -23,9 +23,13 @@ private:
 	static constexpr float wingWidth = 18.0f;
 	Color wingColor = Colors::LightGray;
 	Color color = Colors::White;
+
 	float speed = 300.0f;
 	float halfHeight;
 	float halfWidth;
+	float exitFactor = 0.045f;
+
 	Vec2 pos;
+
 	bool hasCoolDown = false;
 };
