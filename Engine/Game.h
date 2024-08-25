@@ -23,6 +23,11 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
+#include "frameTimer.h"
+#include "Ball.h"
+#include "Sound.h"
+#include "Brick.h"
+#include "Paddle.h"
 
 class Game
 {
@@ -33,14 +38,26 @@ public:
 	void Go();
 private:
 	void ComposeFrame();
-	void UpdateModel();
-	/********************************/
-	/*  User Functions              */
-	/********************************/
+	void UpdateModel(float dt);
+
 private:
 	MainWindow& wnd;
 	Graphics gfx;
-	/********************************/
-	/*  User Variables              */
-	/********************************/
+
+	static constexpr float brickWidth = 40.0f;
+	static constexpr float brickHeight = 24.0f;
+	static constexpr int nBricksAcross = 18;
+	static constexpr int nBricksDown = 4;
+	static constexpr int nbricks = nBricksAcross * nBricksDown;
+
+	FrameTimer ft;
+	Ball ball;
+	Brick bricks[nbricks];
+	Paddle pad;
+	RectF walls;
+	Sound soundPad;
+	Sound soundBrick;
+	Sound soundGameOver;
+
+	bool gameIsOver = false;
 };
